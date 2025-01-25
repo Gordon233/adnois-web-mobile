@@ -9,6 +9,7 @@ RUN npm install -g pnpm
 COPY pnpm-workspace.yaml package.json pnpm-lock.yaml tsconfig.json ./
 COPY packages/shared/package.json ./packages/shared/
 COPY packages/web/package.json ./packages/web/
+COPY packages/api/package.json ./packages/api/
 COPY turbo.json ./
 
 # Install dependencies
@@ -17,6 +18,7 @@ RUN pnpm install --frozen-lockfile
 # Copy source code
 COPY packages/shared ./packages/shared
 COPY packages/web ./packages/web
+COPY packages/api ./packages/api
 
 EXPOSE 5173
 

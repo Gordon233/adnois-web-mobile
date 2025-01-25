@@ -24,6 +24,7 @@ services:
     volumes:
       - ./packages/shared:/app/packages/shared
       - ./packages/web:/app/packages/web
+      - ./packages/api:/app/packages/api
     environment:
       - NODE_ENV=development
       - VITE_API_URL=http://localhost:3333

@@ -1,9 +1,12 @@
 {
-  "name": "api",
+  "name": "@monorepo/api",
   "version": "0.0.0",
   "private": true,
   "type": "module",
   "license": "UNLICENSED",
+  "exports": {
+    ".": "./.adonisjs/index.ts"
+  },
   "scripts": {
     "start": "node bin/server.js",
     "build": "node ace build",
@@ -55,6 +58,7 @@
     "@adonisjs/core": "^6.17.0",
     "@adonisjs/cors": "^2.2.1",
     "@adonisjs/lucid": "^21.5.1",
+    "@tuyau/core": "^0.3.0",
     "@vinejs/vine": "^3.0.0",
     "luxon": "^3.5.0",
     "pg": "^8.13.1",

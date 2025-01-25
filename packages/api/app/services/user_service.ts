@@ -18,4 +18,14 @@ export class UserService {
     const user = await User.create(data)
     return user
   }
+
+  async findByEmail(email: string) {
+    const user = await User.findBy('email', email)
+    return user
+  }
+
+  async findByName(name: string) {
+    const user = await User.findBy('name', name)
+    return user
+  }
 }
