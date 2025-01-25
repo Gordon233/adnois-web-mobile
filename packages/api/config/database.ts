@@ -2,6 +2,7 @@ import env from '#start/env'
 import { defineConfig } from '@adonisjs/lucid'
 
 const dbConfig = defineConfig({
+  prettyPrintDebugQueries: true,
   connection: 'postgres',
   connections: {
     postgres: {
@@ -13,6 +14,7 @@ const dbConfig = defineConfig({
         password: env.get('DB_PASSWORD'),
         database: env.get('DB_DATABASE'),
       },
+      debug: env.get('NODE_ENV') === 'development' ? true : false,
       migrations: {
         naturalSort: true,
         paths: ['database/migrations'],
