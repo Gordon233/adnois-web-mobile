@@ -13,16 +13,13 @@ export const tuyau = createTuyau({
 function App() {
   const [count, setCount] = useState(0);
   const [users, setUsers] = useState<any>(null);
-  const [userByEmail, setUserByEmail] = useState<any>(null);
   const [userByName, setUserByName] = useState<any>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       const usersData = await tuyau.users({ id: 1 }).$get();
-      const emailData = await tuyau.users.findByEmail.$get({ query: { email: 'test@test.com' } });
-      const nameData = await tuyau.users.findByName.$get({ query: { name: 'test' } });
+      const nameData = await tuyau.users.findByName.$post({ name: 'test' });
       setUsers(usersData);
-      setUserByEmail(emailData);
       setUserByName(nameData);
     };
     fetchData();
@@ -47,7 +44,6 @@ function App() {
       </div>
       <p className='read-the-docs'>Click on the Vite and React logos to learn more</p>
       <div>{JSON.stringify(users)}</div>
-      <div>{JSON.stringify(userByEmail)}</div>
       <div>{JSON.stringify(userByName)}</div>
     </>
   );

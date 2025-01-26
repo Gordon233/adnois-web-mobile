@@ -35,10 +35,6 @@ type UsersIdDelete = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/users_controller.ts').default['destroy'], false>
 }
-type UsersFindbyemailPost = {
-  request: unknown
-  response: MakeTuyauResponse<import('../app/controllers/users_controller.ts').default['findByEmail'], false>
-}
 type UsersFindbynamePost = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/users_controller.ts').default['findByName'], false>
@@ -70,11 +66,6 @@ export interface ApiDefinition {
       '$put': UsersIdPutPatch;
       '$patch': UsersIdPutPatch;
       '$delete': UsersIdDelete;
-    };
-    'findByEmail': {
-      '$url': {
-      };
-      '$post': UsersFindbyemailPost;
     };
     'findByName': {
       '$url': {
