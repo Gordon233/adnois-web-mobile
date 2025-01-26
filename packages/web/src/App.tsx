@@ -10,13 +10,18 @@ export const tuyau = createTuyau({
   baseUrl: 'http://localhost:3333',
 });
 
+// More type-safe version that avoids 'any'
+type ApiResponse<T> = T extends Promise<{ data: infer D }> ? D : never;
+type GetUsersResponse = ApiResponse<ReturnType<typeof tuyau.users.$get>>;
+
 function App() {
+  const [users, setUsers] = useState<GetUsersResponse>([]);
+
   useEffect(() => {
     const fetchData = async () => {
       const result4 = await tuyau.users.$get({ query: { limit: 10, page: 1 } });
       if (result4.data) {
-        const user = result4.data[1];
-        console.log(user.id, user.name, user.email, user.age);
+        setUsers(result4.data);
       }
     };
     fetchData();
@@ -39,6 +44,7 @@ function App() {
         </p>
       </div>
       <p className='read-the-docs'>Click on the Vite and React logos to learn more</p>
+      <div>{users && users.map((user) => <div key={user.id}>{user.email}</div>)}</div>
     </>
   );
 }
