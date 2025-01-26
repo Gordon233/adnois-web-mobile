@@ -1,4 +1,5 @@
 import User from '#models/user'
+import { UserInterface } from '#models/user'
 
 interface CreateUserData {
   email: string

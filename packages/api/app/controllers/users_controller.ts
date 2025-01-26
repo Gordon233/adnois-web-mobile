@@ -1,65 +1,25 @@
-import type { HttpContext } from '@adonisjs/core/http'
-import { UserService } from '#services/user_service'
-import { createUserValidator } from '#validators/user_validator'
-import { inject } from '@adonisjs/core'
+import { createUserValidator, getUsersValidator } from '#validators/user_validator'
+import { HttpContext } from '@adonisjs/core/http'
 
-@inject()
 export default class UsersController {
-  constructor(protected userService: UserService) {}
-
   /**
    * Display a list of resource
    */
-  async index({}: HttpContext) {
-    return 'index users!!'
+  async index({ request }: HttpContext) {
+    await request.validateUsing(getUsersValidator)
+
+    return [
+      { id: 1, name: 'John Doe', email: 'foo@ok.com', age: 20 },
+      { id: 2, name: 'Jane Doe', email: 'bar@ok.com', age: 30 },
+    ]
   }
 
   /**
-   * Display form to create a new record
-   */
-  async create({ request }: HttpContext) {}
-
-  /**
-   * Handle form submission for the create action
+   * Create a new user
    */
   async store({ request }: HttpContext) {
-    const payload = await request.validateUsing(createUserValidator)
-    const user = await this.userService.create(payload)
-    return user
-  }
+    await request.validateUsing(createUserValidator)
 
-  /**
-   * Show individual record
-   */
-  async show({ params }: HttpContext) {
-    const user = await this.userService.find(params.id)
-    return user
-  }
-
-  /**
-   * Edit individual record
-   */
-  async edit({ params }: HttpContext) {}
-
-  /**
-   * Handle form submission for the edit action
-   */
-  async update({}: HttpContext) {}
-
-  /**
-   * Delete record
-   */
-  async destroy({ params }: HttpContext) {}
-
-  async findByEmail({ request }: HttpContext) {
-    const email = request.body().email
-    const user = await this.userService.findByEmail(email)
-    return user
-  }
-
-  async findByName({ request }: HttpContext) {
-    const name = request.body().name
-    const user = await this.userService.findByName(name)
-    return user
+    return { success: true }
   }
 }

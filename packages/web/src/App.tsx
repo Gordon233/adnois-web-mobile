@@ -11,16 +11,13 @@ export const tuyau = createTuyau({
 });
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [users, setUsers] = useState<any>(null);
-  const [userByName, setUserByName] = useState<any>(null);
-
   useEffect(() => {
     const fetchData = async () => {
-      const usersData = await tuyau.users({ id: 1 }).$get();
-      const nameData = await tuyau.users.findByName.$post({ name: 'test' });
-      setUsers(usersData);
-      setUserByName(nameData);
+      const result4 = await tuyau.users.$get({ query: { limit: 10, page: 1 } });
+      if (result4.data) {
+        const user = result4.data[1];
+        console.log(user.id, user.name, user.email, user.age);
+      }
     };
     fetchData();
   }, []);
@@ -37,14 +34,11 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className='card'>
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
       </div>
       <p className='read-the-docs'>Click on the Vite and React logos to learn more</p>
-      <div>{JSON.stringify(users)}</div>
-      <div>{JSON.stringify(userByName)}</div>
     </>
   );
 }

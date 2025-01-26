@@ -59,6 +59,7 @@
     "@adonisjs/cors": "^2.2.1",
     "@adonisjs/lucid": "^21.5.1",
     "@tuyau/core": "^0.3.0",
+    "@tuyau/utils": "^0.0.6",
     "@vinejs/vine": "^3.0.0",
     "luxon": "^3.5.0",
     "pg": "^8.13.1",

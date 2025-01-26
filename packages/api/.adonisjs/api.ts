@@ -8,36 +8,12 @@ import type { MakeTuyauRequest, MakeTuyauResponse } from '@tuyau/utils/types'
 import type { InferInput } from '@vinejs/vine/types'
 
 type UsersGetHead = {
-  request: unknown
-  response: MakeTuyauResponse<import('../app/controllers/users_controller.ts').default['index'], false>
-}
-type UsersCreateGetHead = {
-  request: unknown
-  response: MakeTuyauResponse<import('../app/controllers/users_controller.ts').default['create'], false>
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/user_validator.ts')['getUsersValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/users_controller.ts').default['index'], true>
 }
 type UsersPost = {
   request: MakeTuyauRequest<InferInput<typeof import('../app/validators/user_validator.ts')['createUserValidator']>>
   response: MakeTuyauResponse<import('../app/controllers/users_controller.ts').default['store'], true>
-}
-type UsersIdGetHead = {
-  request: unknown
-  response: MakeTuyauResponse<import('../app/controllers/users_controller.ts').default['show'], false>
-}
-type UsersIdEditGetHead = {
-  request: unknown
-  response: MakeTuyauResponse<import('../app/controllers/users_controller.ts').default['edit'], false>
-}
-type UsersIdPutPatch = {
-  request: unknown
-  response: MakeTuyauResponse<import('../app/controllers/users_controller.ts').default['update'], false>
-}
-type UsersIdDelete = {
-  request: unknown
-  response: MakeTuyauResponse<import('../app/controllers/users_controller.ts').default['destroy'], false>
-}
-type UsersFindbynamePost = {
-  request: unknown
-  response: MakeTuyauResponse<import('../app/controllers/users_controller.ts').default['findByName'], false>
 }
 export interface ApiDefinition {
   'users': {
@@ -45,33 +21,7 @@ export interface ApiDefinition {
     };
     '$get': UsersGetHead;
     '$head': UsersGetHead;
-    'create': {
-      '$url': {
-      };
-      '$get': UsersCreateGetHead;
-      '$head': UsersCreateGetHead;
-    };
     '$post': UsersPost;
-    ':id': {
-      '$url': {
-      };
-      '$get': UsersIdGetHead;
-      '$head': UsersIdGetHead;
-      'edit': {
-        '$url': {
-        };
-        '$get': UsersIdEditGetHead;
-        '$head': UsersIdEditGetHead;
-      };
-      '$put': UsersIdPutPatch;
-      '$patch': UsersIdPutPatch;
-      '$delete': UsersIdDelete;
-    };
-    'findByName': {
-      '$url': {
-      };
-      '$post': UsersFindbynamePost;
-    };
   };
 }
 const routes = [
@@ -87,7 +37,7 @@ const routes = [
     name: 'users.create',
     path: '/users/create',
     method: ["GET","HEAD"],
-    types: {} as UsersCreateGetHead,
+    types: {} as unknown,
   },
   {
     params: [],
@@ -101,28 +51,28 @@ const routes = [
     name: 'users.show',
     path: '/users/:id',
     method: ["GET","HEAD"],
-    types: {} as UsersIdGetHead,
+    types: {} as unknown,
   },
   {
     params: ["id"],
     name: 'users.edit',
     path: '/users/:id/edit',
     method: ["GET","HEAD"],
-    types: {} as UsersIdEditGetHead,
+    types: {} as unknown,
   },
   {
     params: ["id"],
     name: 'users.update',
     path: '/users/:id',
     method: ["PUT","PATCH"],
-    types: {} as UsersIdPutPatch,
+    types: {} as unknown,
   },
   {
     params: ["id"],
     name: 'users.destroy',
     path: '/users/:id',
     method: ["DELETE"],
-    types: {} as UsersIdDelete,
+    types: {} as unknown,
   },
 ] as const;
 export const api = {
