@@ -12,12 +12,12 @@ type UsersGetHead = {
   response: MakeTuyauResponse<import('../app/controllers/users_controller.ts').default['index'], false>
 }
 type UsersCreateGetHead = {
-  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/user_validator.ts')['createUserValidator']>>
-  response: MakeTuyauResponse<import('../app/controllers/users_controller.ts').default['create'], true>
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/users_controller.ts').default['create'], false>
 }
 type UsersPost = {
-  request: unknown
-  response: MakeTuyauResponse<import('../app/controllers/users_controller.ts').default['store'], false>
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/user_validator.ts')['createUserValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/users_controller.ts').default['store'], true>
 }
 type UsersIdGetHead = {
   request: unknown
@@ -35,11 +35,11 @@ type UsersIdDelete = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/users_controller.ts').default['destroy'], false>
 }
-type UsersFindbyemailGetHead = {
+type UsersFindbyemailPost = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/users_controller.ts').default['findByEmail'], false>
 }
-type UsersFindbynameGetHead = {
+type UsersFindbynamePost = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/users_controller.ts').default['findByName'], false>
 }
@@ -74,14 +74,12 @@ export interface ApiDefinition {
     'findByEmail': {
       '$url': {
       };
-      '$get': UsersFindbyemailGetHead;
-      '$head': UsersFindbyemailGetHead;
+      '$post': UsersFindbyemailPost;
     };
     'findByName': {
       '$url': {
       };
-      '$get': UsersFindbynameGetHead;
-      '$head': UsersFindbynameGetHead;
+      '$post': UsersFindbynamePost;
     };
   };
 }

@@ -17,16 +17,16 @@ export default class UsersController {
   /**
    * Display form to create a new record
    */
-  async create({ request }: HttpContext) {
-    const payload = await request.validateUsing(createUserValidator)
-    const user = await this.userService.create(payload)
-    return user
-  }
+  async create({ request }: HttpContext) {}
 
   /**
    * Handle form submission for the create action
    */
-  async store({ request }: HttpContext) {}
+  async store({ request }: HttpContext) {
+    const payload = await request.validateUsing(createUserValidator)
+    const user = await this.userService.create(payload)
+    return user
+  }
 
   /**
    * Show individual record
@@ -52,13 +52,13 @@ export default class UsersController {
   async destroy({ params }: HttpContext) {}
 
   async findByEmail({ request }: HttpContext) {
-    const email = request.input('email')
+    const email = request.body().email
     const user = await this.userService.findByEmail(email)
     return user
   }
 
   async findByName({ request }: HttpContext) {
-    const name = request.input('name')
+    const name = request.body().name
     const user = await this.userService.findByName(name)
     return user
   }

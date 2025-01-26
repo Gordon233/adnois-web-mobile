@@ -25,7 +25,7 @@ export class UserService {
   }
 
   async findByName(name: string) {
-    const user = await User.findBy('name', name)
+    const user = await User.query().where('fullName', 'like', `%${name}%`)
     return user
   }
 }

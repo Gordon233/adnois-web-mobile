@@ -15,7 +15,7 @@ router.resource('users', '#controllers/users_controller')
 // router.get('users/findByEmail', [UsersController, 'findByEmail'])
 router
   .group(() => {
-    router.get('/findByEmail', '#controllers/users_controller.findByEmail')
-    router.get('/findByName', '#controllers/users_controller.findByName')
+    router.post('/findByEmail', '#controllers/users_controller.findByEmail')
+    router.post('/findByName', '#controllers/users_controller.findByName')
   })
   .prefix('users')

@@ -18,7 +18,7 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const usersData = await tuyau.users.$get();
+      const usersData = await tuyau.users({ id: 1 }).$get();
       const emailData = await tuyau.users.findByEmail.$get({ query: { email: 'test@test.com' } });
       const nameData = await tuyau.users.findByName.$get({ query: { name: 'test' } });
       setUsers(usersData);
