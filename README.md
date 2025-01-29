@@ -8,8 +8,6 @@ A monorepo containing web, mobile, and API applications using Turborepo for effi
 ├── packages/
 │   ├── api/        # Backend API service
 │   ├── web/        # Web application
-│   ├── mobile/     # Mobile application
-│   └── shared/     # Shared utilities and components
 ```
 
 ## Prerequisites
@@ -27,7 +25,7 @@ pnpm install
 
 2. Start the development environment:
 ```bash
-docker-compose -f docker-compose.dev.yml up
+docker-compose down && docker-compose build --no-cache && docker-compose up
 ```
 
 ## Development
